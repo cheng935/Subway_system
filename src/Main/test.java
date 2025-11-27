@@ -1,24 +1,28 @@
 package Main;
 
 import Algorithms.A_Star;
-import station_database.*;
+import Station_Data.*;
 
 import java.util.List;
 
 public class test {
     public static void main(String[] args) {
-        Station A = new Station(1,"A");
-        Station B = new Station(2,"B");
-        Station C = new Station(3,"C");
-        Station D = new Station(4,"D");
-        Station E = new Station(5,"E");
-        Station F = new Station(6,"F");
-        Station G = new Station(7,"G");
-        Station H = new Station(8,"H");
-        Station I = new Station(9,"I");
-        Station J = new Station(10,"J");
-        Station K = new Station(11,"K");
-        Station L = new Station(12,"L");
+        Station A = new Station(1,"A",-2,0);
+        Station B = new Station(2,"B",-1,0);
+        Station C = new Station(3,"C",0,0);
+        Station D = new Station(4,"D",1,0);
+        Station E = new Station(5,"E",0,1);
+        Station F = new Station(6,"F",0,-1);
+        Station G = new Station(7,"G",0,-2);
+        Station H = new Station(8,"H",-1,-3);
+
+        //加入坐标系后，通过I点变化导致的结果变化可以反映h正常工作.-->I(1,-1)时，结果为HGID   I(2,-2)时，结果为HGFCD。
+        //Station I = new Station(9,"I",1,-1);
+        Station I = new Station(9,"I",2,-2);
+
+        Station J = new Station(10,"J",1,1);
+        Station K = new Station(11,"K",0,-3);
+        Station L = new Station(12,"L",2,0);
 
         SubwayLine line1 = new SubwayLine(1,"一号线");
         line1.addStation(A);
@@ -47,7 +51,7 @@ public class test {
         GraphBuilder.build(line3);
 
         // 4. A* 搜索
-        List<Station> path = A_Star.aStarSearch(H, D);
+        List<Station> path = A_Star.aStarSearch(D, H);
 
         System.out.println("路径：");
         for (Station s : path) {

@@ -1,6 +1,6 @@
 package Algorithms;
 
-import station_database.*;
+import Station_Data.*;
 import java.util.*;
 
 //A* 算法的核心算式是 f(n) = g(n) + h(n). 其中g为该站点到起点的距离，
@@ -8,15 +8,15 @@ import java.util.*;
 //f即为判断站点走向的数，站点f值越小，其预测距离终点就越近。将每次处理的f最小的站点排列，就可得出最优顺序。
 public class A_Star {
 
-    //启发函数，此处我将h设为0，目前等价Dijkstra算法
-    private static int heuristic(Station a, Station b) {
-        return 0;
+    //启发函数，现在我通过建系，用于计算直线距离作为h。
+    private static double heuristic(Station a, Station b) {
+        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
     }
 
     public static List<Station> aStarSearch(Station start, Station goal) {
 
         //open：优先队列，其中f(n)最小的站点优先提出进行处理
-        PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingInt(n -> n.f));
+        PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingDouble(n -> n.f));
 
         //gScore：起点到某节点的当前最短距离,即为g(n)
         Map<Station, Integer> gScore = new HashMap<>();
@@ -48,7 +48,7 @@ public class A_Star {
 
                     cameFrom.put(neighbor, current.station);
                     gScore.put(neighbor, tentativeG);
-                    int f = tentativeG + heuristic(neighbor, goal);
+                    double f = tentativeG + heuristic(neighbor, goal);
 
                     open.add(new Node(neighbor, tentativeG, f));
                 }

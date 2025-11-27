@@ -1,4 +1,4 @@
-package station_database;
+package Station_Data;
 
 //相邻站点类
 public class Neighbor{

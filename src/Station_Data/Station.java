@@ -1,4 +1,4 @@
-package station_database;
+package Station_Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,17 @@ public class Station {
     public int id;
     public String name;
 
+    //为建系做准备
+    public double x;
+    public double y;
+
     public NeighborList neighborList = new NeighborList();
 
-    public Station(int id, String name){
+    public Station(int id, String name, int x, int y){
         this.id = id;
         this.name = name;
+        this.x = x;
+        this.y = y;
     }
 
     public void addNeighbor(Station station, int distance){
