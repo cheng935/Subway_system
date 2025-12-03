@@ -1,6 +1,7 @@
 package Main;
 
 import Algorithms.A_Star;
+import Algorithms.BFSSearching;
 import Station_Data.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class test {
         Station G = new Station(7,"G",0,-2);
         Station H = new Station(8,"H",-1,-3);
 
-        //加入坐标系后，通过I点变化导致的结果变化可以反映h正常工作.-->I(1,-1)时，结果为HGID   I(2,-2)时，结果为HGFCD。
+        //加入坐标系后，I点坐标变化导致的结果变化可以反映启发值h正常工作.-->I(1,-1)时，从H到D，结果为HGID   I(2,-2)时，结果为HGFCD。
         //Station I = new Station(9,"I",1,-1);
         Station I = new Station(9,"I",2,-2);
 
@@ -45,16 +46,28 @@ public class test {
         line3.addStation(D);
         line3.addStation(J);
 
-        // 3. 建图（必须每条线都 build）
+        //建图（必须每条线都 build）
         GraphBuilder.build(line1);
         GraphBuilder.build(line2);
         GraphBuilder.build(line3);
 
-        // 4. A* 搜索
-        List<Station> path = A_Star.aStarSearch(D, H);
 
-        System.out.println("路径：");
+        //用户输入
+        Station start = H;
+        Station goal = D;
+
+        //A* 搜索
+        //可通过switch-case完成用户输入功能
+        List<Station> path = A_Star.aStarSearch(start, goal);
+        System.out.println("A*算法路径：");
         for (Station s : path) {
+            System.out.print(s.name + " ");
+        }
+
+        List<Station> pathBFS = BFSSearching.BFSSearchPath(start, goal);
+
+        System.out.println("\nBFS算法路径：");
+        for (Station s : pathBFS) {
             System.out.print(s.name + " ");
         }
 

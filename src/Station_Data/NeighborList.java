@@ -6,7 +6,7 @@ public class NeighborList{
     public Neighbor tail = null;
 
     //将新的相邻站点添加到相邻站点集
-    public void addNeighbor(Station station, int distance){
+    public void addNeighbor(Station station, double distance){
         Neighbor newNeighbor = new Neighbor(station, distance);
 
         if (head == null){

@@ -22,7 +22,7 @@ public class Station {
         this.y = y;
     }
 
-    public void addNeighbor(Station station, int distance){
+    public void addNeighbor(Station station, double distance){
         neighborList.addNeighbor(station, distance);
     }
 

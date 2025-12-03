@@ -15,16 +15,16 @@ public class A_Star {
 
     public static List<Station> aStarSearch(Station start, Station goal) {
 
-        //open：优先队列，其中f(n)最小的站点优先提出进行处理
+        //open：优先队列，其中f(n)最小的站点优先提出进行处理,此处使用lambda表达式，旨在找出f值最小的站点。也可以使用最小堆
         PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingDouble(n -> n.f));
 
-        //gScore：起点到某节点的当前最短距离,即为g(n)
-        Map<Station, Integer> gScore = new HashMap<>();
+        //gScore：起点到某节点的当前最短距离,即为g(n),存储到哈希图中
+        Map<Station, Double> gScore = new HashMap<>();
 
-        //用于路径回溯
+        //用于路径回溯，第一个station存储当前站点，第二个存储前一个站点
         Map<Station, Station> cameFrom = new HashMap<>();
 
-        gScore.put(start, 0);
+        gScore.put(start, 0.0);
         open.add(new Node(start, 0, heuristic(start, goal)));
 
         while (!open.isEmpty()) {
@@ -37,15 +37,15 @@ public class A_Star {
             }
 
             //遍历当前 station 的所有邻居（通过NeighborList获取）
-            Neighbor neighborNode = current.station.neighborList.head;
-            while (neighborNode != null) {
+            Neighbor neighborPointer = current.station.neighborList.head;
+            while (neighborPointer != null) {
 
-                Station neighbor = neighborNode.station;
-                int tentativeG = gScore.get(current.station) + neighborNode.distance;
+                Station neighbor = neighborPointer.station;
+                double tentativeG = gScore.get(current.station) + neighborPointer.distance;
 
                 //若首次访问或找到更优路径
-                if (!gScore.containsKey(neighbor) || tentativeG < gScore.get(neighbor)) {
-
+                if (!gScore.containsKey(neighbor) || tentativeG < gScore.get(neighbor))
+                {
                     cameFrom.put(neighbor, current.station);
                     gScore.put(neighbor, tentativeG);
                     double f = tentativeG + heuristic(neighbor, goal);
@@ -53,7 +53,7 @@ public class A_Star {
                     open.add(new Node(neighbor, tentativeG, f));
                 }
 
-                neighborNode = neighborNode.next;
+                neighborPointer = neighborPointer.next;
             }
         }
 
