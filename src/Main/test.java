@@ -5,9 +5,13 @@ import Algorithms.BFSSearching;
 import Station_Data.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class test {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+
         Station A = new Station(1,"A",-2,0);
         Station B = new Station(2,"B",-1,0);
         Station C = new Station(3,"C",0,0);
@@ -53,8 +57,51 @@ public class test {
 
 
         //用户输入
-        Station start = H;
-        Station goal = D;
+        Station start;
+        Station goal;
+
+        System.out.println("Enter your start station: ");
+        String inputStart = sc.next().toUpperCase();
+
+        switch (inputStart) {
+            case "A": start = A; break;
+            case "B": start = B; break;
+            case "C": start = C; break;
+            case "D": start = D; break;
+            case "E": start = E; break;
+            case "F": start = F; break;
+            case "G": start = G; break;
+            case "H": start = H; break;
+            case "I": start = I; break;
+            case "J": start = J; break;
+            case "K": start = K; break;
+            case "L": start = L; break;
+            default:
+                System.out.println("输入的起点不存在!");
+                return;
+        }
+
+        System.out.println("Enter your goal station: ");
+        String inputGoal = sc.next().toUpperCase();
+
+        switch (inputGoal) {
+            case "A": goal = A; break;
+            case "B": goal = B; break;
+            case "C": goal = C; break;
+            case "D": goal = D; break;
+            case "E": goal = E; break;
+            case "F": goal = F; break;
+            case "G": goal = G; break;
+            case "H": goal = H; break;
+            case "I": goal = I; break;
+            case "J": goal = J; break;
+            case "K": goal = K; break;
+            case "L": goal = L; break;
+            default:
+                System.out.println("输入的终点不存在!");
+                return;
+        }
+
 
         //A* 搜索
         //可通过switch-case完成用户输入功能
