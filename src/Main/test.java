@@ -4,8 +4,7 @@ import Algorithms.A_Star;
 import Algorithms.BFSSearching;
 import Station_Data.*;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class test {
     public static void main(String[] args) {
@@ -55,8 +54,8 @@ public class test {
         GraphBuilder.build(line2);
         GraphBuilder.build(line3);
 
-
-        //用户输入
+/*
+        //switch-case实现用户交互。
         Station start;
         Station goal;
 
@@ -77,7 +76,7 @@ public class test {
             case "K": start = K; break;
             case "L": start = L; break;
             default:
-                System.out.println("输入的起点不存在!");
+                System.out.println("Invalid input! / Station dose not exists!");
                 return;
         }
 
@@ -98,24 +97,51 @@ public class test {
             case "K": goal = K; break;
             case "L": goal = L; break;
             default:
-                System.out.println("输入的终点不存在!");
+                System.out.println("Invalid input! / Station dose not exists!");
                 return;
         }
+*/
 
 
-        //A* 搜索
-        //可通过switch-case完成用户输入功能
-        List<Station> path = A_Star.aStarSearch(start, goal);
-        System.out.println("A*算法路径：");
-        for (Station s : path) {
-            System.out.print(s.name + " ");
-        }
+        //使用HashMap实现用户交互,与switch-case相比更易维护且速度更快。更符合课程要求。
+        HashMap<String, Station> stationList = new HashMap<>();
 
-        List<Station> pathBFS = BFSSearching.BFSSearchPath(start, goal);
+        stationList.put("A", A);
+        stationList.put("B", B);
+        stationList.put("C", C);
+        stationList.put("D", D);
+        stationList.put("E", E);
+        stationList.put("F", F);
+        stationList.put("G", G);
+        stationList.put("H", H);
+        stationList.put("I", I);
+        stationList.put("J", J);
+        stationList.put("K", K);
+        stationList.put("L", L);
 
-        System.out.println("\nBFS算法路径：");
-        for (Station s : pathBFS) {
-            System.out.print(s.name + " ");
+        try {
+            System.out.println("Enter your start station: ");
+            Station start = stationList.get(sc.next().toUpperCase());
+
+            System.out.println("Enter your goal station: ");
+            Station goal = stationList.get(sc.next().toUpperCase());
+
+            //A* 搜索
+            List<Station> path = A_Star.aStarSearch(start, goal);
+
+            System.out.print("A*算法路径：");
+            for (Station s : path) {
+                System.out.print(s.name + "-");
+            }
+
+            List<Station> pathBFS = BFSSearching.BFSSearchPath(start, goal);
+
+            System.out.print("\nBFS算法路径：");
+            for (Station s : pathBFS) {
+                System.out.print(s.name + "-");
+            }
+        } catch (NullPointerException e){
+            System.out.println("Invalid input / Station dose not exists!");
         }
 
     }
