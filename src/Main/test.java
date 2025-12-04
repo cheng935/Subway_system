@@ -33,7 +33,7 @@ public class test {
         line1.addStation(B);
         line1.addStation(C);
         line1.addStation(D);
-        line1.addStation(E);
+        line1.addStation(L);
 
         SubwayLine line2 = new SubwayLine(2,"二号线");
         line2.addStation(E);
@@ -120,10 +120,10 @@ public class test {
         stationList.put("L", L);
 
         try {
-            System.out.println("Enter your start station: ");
+            System.out.print("Enter your start station: ");
             Station start = stationList.get(sc.next().toUpperCase());
 
-            System.out.println("Enter your goal station: ");
+            System.out.print("Enter your goal station: ");
             Station goal = stationList.get(sc.next().toUpperCase());
 
             //A* 搜索
@@ -131,14 +131,20 @@ public class test {
 
             System.out.print("A*算法路径：");
             for (Station s : path) {
-                System.out.print(s.name + "-");
+                if (!s.equals(path.get(path.size()  - 1)))
+                    System.out.print(s.name + "-");
+                else
+                    System.out.print(s.name);
             }
 
             List<Station> pathBFS = BFSSearching.BFSSearchPath(start, goal);
 
             System.out.print("\nBFS算法路径：");
             for (Station s : pathBFS) {
-                System.out.print(s.name + "-");
+                if (!s.equals(path.get(path.size() - 1)))
+                    System.out.print(s.name + "-");
+                else
+                    System.out.print(s.name);
             }
         } catch (NullPointerException e){
             System.out.println("Invalid input / Station dose not exists!");
