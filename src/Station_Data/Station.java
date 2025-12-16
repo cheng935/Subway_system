@@ -15,7 +15,7 @@ public class Station {
 
     public NeighborList neighborList = new NeighborList();
 
-    public Station(int id, String name, int x, int y){
+    public Station(int id, String name, double x, double y){
         this.id = id;
         this.name = name;
         this.x = x;

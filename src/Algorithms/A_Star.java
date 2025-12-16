@@ -24,12 +24,21 @@ public class A_Star {
         //用于路径回溯，第一个station存储当前站点，第二个存储前一个站点
         Map<Station, Station> cameFrom = new HashMap<>();
 
+        //closed: 已经处理过的站点，不再参与后续线路设计。
+        Set<Station> closed = new HashSet<>();
+
         gScore.put(start, 0.0);
         open.add(new Node(start, 0, heuristic(start, goal)));
 
         while (!open.isEmpty()) {
 
             Node current = open.poll();
+
+            if (closed.contains(current.station)) {
+                continue;
+            }
+
+            closed.add(current.station);
 
             //如果已经到达终点
             if (current.station == goal) {
@@ -41,6 +50,12 @@ public class A_Star {
             while (neighborPointer != null) {
 
                 Station neighbor = neighborPointer.station;
+
+                if (closed.contains(neighbor)) {
+                    neighborPointer = neighborPointer.next;
+                    continue;
+                }
+
                 double tentativeG = gScore.get(current.station) + neighborPointer.distance;
 
                 //若首次访问或找到更优路径
