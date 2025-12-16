@@ -141,7 +141,7 @@ public class test {
 
             System.out.print("\nBFS算法路径：");
             for (Station s : pathBFS) {
-                if (!s.equals(path.get(path.size() - 1)))
+                if (!s.equals(path.get(pathBFS.size() - 1)))
                     System.out.print(s.name + "-");
                 else
                     System.out.print(s.name);
