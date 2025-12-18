@@ -256,7 +256,7 @@ public class test {
             //A* 搜索
             List<Station> path = A_Star.aStarSearch(start, goal);
 
-            System.out.print("A*算法路径(路程最短)：");
+            System.out.print("A* algorithm path (shortest distance)： ");
             for (Station s : path) {
                 if (!s.equals(path.get(path.size()  - 1)))
                     System.out.print(s.name + "-");
@@ -266,7 +266,7 @@ public class test {
 
             List<Station> pathBFS = BFSSearching.BFSSearchPath(start, goal);
 
-            System.out.print("\nBFS算法路径(站点最少)：");
+            System.out.print("\nBFS algorithm path (with the least number of stations)： ");
             for (Station s : pathBFS) {
                 if (!s.equals(pathBFS.get(pathBFS.size() - 1)))
                     System.out.print(s.name + "-");
